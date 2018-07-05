@@ -1,4 +1,4 @@
-from oauth2_provider.views.generic import ProtectedResourceView
+from oauth2_provider.views.generic import ProtectedResourceView, ReadWriteScopedResourceView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 
@@ -10,6 +10,10 @@ class ApiEndpoint(ProtectedResourceView):
 @login_required()
 def secret_page(request, *args, **kwargs):
     return HttpResponse('Secret contents!', status=200)
+
+
+
+
 
 
     #screte
@@ -31,12 +35,24 @@ def secret_page(request, *args, **kwargs):
     "scope": "read write groups"
 }
 
-{"access_token": "c1ChPLWrnK2bchrJu8iSrDjpsG92Xf", 
+{"access_token": "hirYcI0NJAr4KwbHCqa5NDDAyVBjLP", 
 "token_type": "Bearer", 
 "expires_in": 36000, 
-"refresh_token": "FPviCIwrLr1mMjg1H5CEvvPcs1l750", 
-"scope": "read write groups"}
+"refresh_token": "G42f3RXWuo3sABg5gaBjNOq9epiJ4S",
+ "scope": "read write groups"}
 
+
+ Retrieve users
+curl -H "Authorization: Bearer hirYcI0NJAr4KwbHCqa5NDDAyVBjLP" http://localhost:8000/users/
+curl -H "Authorization: Bearer <your_access_token>" http://localhost:8000/users/1/
+
+curl -H "Authorization: Bearer hirYcI0NJAr4KwbHCqa5NDDAyVBjLP" http://localhost:8000/teste/
+
+# Retrieve groups
+curl -H "Authorization: Bearer <your_access_token>" http://localhost:8000/groups/
+
+# Insert a new user
+curl -H "Authorization: Bearer <your_access_token>" -X POST -d"username=foo&password=bar" http://localhost:8000/users/
 
 
 '''

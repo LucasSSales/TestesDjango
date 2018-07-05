@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'rest_framework',
     'corsheaders',
+    'materias.apps.MateriasConfig',
 ]
 
 OAUTH2_PROVIDER = {
