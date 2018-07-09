@@ -8,7 +8,8 @@ from rest_framework import generics, permissions, serializers
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 from . import views
-
+from materias.views import ListCreateMaterias
+'''
 # first we define the serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -36,15 +37,18 @@ class GroupList(generics.ListAPIView):
     required_scopes = ['groups']
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+'''
 
 # Setup the URLs and include login URLs for the browsable API.
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url(r'^kkteste/', include('materias.urls'))
-    # url('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    # url('users/', UserList.as_view()),
-    # url('users/<pk>/', UserDetails.as_view()),
-    # url('groups/', GroupList.as_view()),
+    url(r'^kkteste/', include('materias.urls')),
+    url('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    url(r'^api/materias/$', ListCreateMaterias.as_view()),
+    ##url(r'^materias/(?P<pk>[0-9]+)$', detalhesDasMaterias.as_view()),
+    #url('users/', UserList.as_view()),
+    #url('users/<pk>/', UserDetails.as_view()),
+    #url('groups/', GroupList.as_view()),
     #url(r'^teste/$')
     # ...
 ]

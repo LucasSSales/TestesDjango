@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'rest_framework',
     'corsheaders',
-    'materias.apps.MateriasConfig',
+    #'materias.apps.MateriasConfig',
+    'materias',
 ]
 
 OAUTH2_PROVIDER = {
@@ -103,6 +104,7 @@ WSGI_APPLICATION = 'apirest_v2.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
+        #'ENGINE':'django.db.backends.postgresql',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
