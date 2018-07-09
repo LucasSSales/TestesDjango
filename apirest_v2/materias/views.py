@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from rest_framework import generics
-from .serializers import materiaSerializer
+from .serializers import materiaSerializer, usuarioSerializer
 from .models import materias
 
 from django.shortcuts import render
@@ -12,8 +12,13 @@ from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from rest_framework import permissions
 
-def index(request):
-    return HttpResponse("<h1>KK EAE JANGUINHO</h1>")
+class criarUsuario(generics.CreateAPIView) :
+    permission_classes = (permissions.AllowAny,)
+    queryset = User.objects.all()
+    serializer_class = usuarioSerializer
+
+#def index(request):
+#    return HttpResponse("<h1>KK EAE JANGUINHO</h1>")
 
 
 class ListCreateMaterias(generics.ListCreateAPIView):
