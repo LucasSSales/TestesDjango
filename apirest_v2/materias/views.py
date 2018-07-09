@@ -24,6 +24,17 @@ class criarUsuario(generics.CreateAPIView) :
 class ListCreateMaterias(generics.ListCreateAPIView):
     queryset = materias.objects.all()
     serializer_class = materiaSerializer
+    def list(self, request) :
+        lista = materias.objects.filter(usuario = request.user)
+        serializer = materiaSerializer(lista, many = True)
+        return Response(serializer.data)
+
+    def create(self, request) :
+        serializer = materiaSerializer(data = request.data)
+        if serializer.is_valid() :
+            serializer.save(usuario = request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
 
