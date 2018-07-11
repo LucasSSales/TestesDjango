@@ -1,56 +1,21 @@
 from django.conf.urls import url, include
-from django.contrib.auth.models import User, Group
 from django.contrib import admin
+from materias.views import criarUsuario
+
 admin.autodiscover()
 
-from rest_framework import generics, permissions, serializers
-
-from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
-
-from . import views
-from materias.views import ListCreateMaterias, criarUsuario, detalhesDasMaterias
-'''
-# first we define the serializers
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ('username', 'email', "first_name", "last_name")
-
-class GroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Group
-        fields = ("name", )
-
-# Create the API views
-class UserList(generics.ListCreateAPIView):
-    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class UserDetails(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class GroupList(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated, TokenHasScope]
-    required_scopes = ['groups']
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-'''
-
-# Setup the URLs and include login URLs for the browsable API.
 urlpatterns = [
     url('admin/', admin.site.urls),
-    #url(r'^kkteste/', include('materias.urls')),
+
+    #Django Oauth Toolkit urls
+    #Urls do DOT para as operacoes de autenticacao e aplicacoes
     url('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url(r'^materias/$', ListCreateMaterias.as_view()),
+
+    #Cria novos usuarios ao sistema - Nao necessita de autenticacao
+    #POST - recebe no Body o nome do usuario e a senha
     url(r'^criarusuario/$', criarUsuario.as_view()),
-    url(r'^materias/(?P<pk>[0-9]+)$', detalhesDasMaterias.as_view()),
-    ##url(r'^materias/(?P<pk>[0-9]+)$', detalhesDasMaterias.as_view()),
-    #url('users/', UserList.as_view()),
-    #url('users/<pk>/', UserDetails.as_view()),
-    #url('groups/', GroupList.as_view()),
-    #url(r'^teste/$')
-    # ...
+
+    #Consultas a lista de Materias - Necessita de Autentiacao
+    #Ver endpoints em 'materias.urls' para ver as operacoes possiveis
+    url(r'^materias/', include('materias.urls')),
 ]

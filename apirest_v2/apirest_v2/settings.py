@@ -25,7 +25,7 @@ SECRET_KEY = '8hm2(j$vyh0mx)$6442&uxqq2863)m3g+9^)b5vyd8ykkax4e5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -40,12 +40,10 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'rest_framework',
     'corsheaders',
-    #'materias.apps.MateriasConfig',
     'materias',
 ]
 
 OAUTH2_PROVIDER = {
-    # this is the list of available scopes
     'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
@@ -60,9 +58,7 @@ REST_FRAMEWORK = {
 
 AUTHENTICATION_BACKENDS = (
     'oauth2_provider.backends.OAuth2Backend',
-    # Uncomment following if you want to access the admin
-    'django.contrib.auth.backends.ModelBackend'
-    #'...',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 MIDDLEWARE = [

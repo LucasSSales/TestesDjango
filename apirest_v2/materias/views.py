@@ -2,27 +2,21 @@ from django.http import HttpResponse
 from rest_framework import generics
 from .serializers import materiaSerializer, usuarioSerializer
 from .models import materias
-
 from django.shortcuts import render
-#from materias.serializers import materiaSerializer, usuarioSerializer
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
 from rest_framework import permissions
 from oauth2_provider.views.token import AuthorizedTokenDeleteView
+from oauth2_provider.contrib.rest_framework import OAuth2Authentication
 
 class criarUsuario(generics.CreateAPIView) :
     permission_classes = (permissions.AllowAny,)
     queryset = User.objects.all()
     serializer_class = usuarioSerializer
 
-#def index(request):
-#    return HttpResponse("<h1>KK EAE JANGUINHO</h1>")
-
-
-class ListCreateMaterias(generics.ListCreateAPIView):
+class ListaDeMaterias(generics.ListCreateAPIView):
     queryset = materias.objects.all()
     serializer_class = materiaSerializer
     def list(self, request) :
@@ -39,8 +33,7 @@ class ListCreateMaterias(generics.ListCreateAPIView):
 
 
 class detalhesDasMaterias(generics.RetrieveUpdateDestroyAPIView):
-    authentication_classes = (SessionAuthentication, BasicAuthentication, )
-    permission_classes = (permissions.IsAuthenticated)
+    permission_classes = (permissions.IsAuthenticated,)
     queryset = materias.objects.all()
     serializer_class = materiaSerializer
     def retrieve(self, request, pk) :
@@ -69,6 +62,7 @@ class detalhesDasMaterias(generics.RetrieveUpdateDestroyAPIView):
             return Response(status=status.HTTP_204_NO_CONTENT) 
         materia.delete()
         return Response(status = status.HTTP_205_RESET_CONTENT)
+
 
 
 
