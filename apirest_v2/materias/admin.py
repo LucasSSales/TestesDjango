@@ -6,10 +6,7 @@ from .models import materias
 
 @admin.register(materias)
 class materiasAdmin(admin.ModelAdmin):
-    list_display = ('id', 'usuario', 'nome', 'ab1', 'ab2', 'reav', 'final', 'media', 'faltas', 'carga_horaria', 'max_faltas', 'conceito')
-    #'created_at', 'modified_at')
+    list_display = ('id', 'usuario', 'nome', 'ab1', 'ab2', 'reav', 'final',
+     'media', 'faltas', 'carga_horaria', 'max_faltas', 'conceito')
 
 
-'''
-
-'''

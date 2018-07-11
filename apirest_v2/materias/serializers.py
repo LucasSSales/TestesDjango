@@ -20,4 +20,6 @@ class materiaSerializer(serializers.ModelSerializer) :
         fields = ('id', 'usuario', 'nome', 'ab1', 'ab2', 'reav', 
         'final', 'media', 'faltas', 'carga_horaria', 'max_faltas', 'conceito')
 
+        #fields = ('id', 'usuario','carga_horaria', 'nome', 'faltas', , 'max_faltas', 'conceito', 'notas')
+
 

@@ -1,0 +1,11 @@
+Autenticacao:
+{username : nome do user,
+password : senha do user,
+client_id : bj3zztPhb0gJllS46YjvG5NwqJjsdYXzpLQQCjE2,
+client_secret : KtOCdgJDTqJpDlPFeUqnGS68bdFyZdT6UUblWVkrGqBGQOE4ELIu3at0eqMZmaVyeDffrO6PakXE9REp1FcGaecxtguZBHoDiDjtyKyTa2DpMfBbD9bFjdtRt9nuWleD,
+grant_type : password}
+
+callback URL: http://localhost:8000/o/token/
+
+Headers para GET/POST/PUT/DELETE de materias:
+{Authorization : Bearer token}
