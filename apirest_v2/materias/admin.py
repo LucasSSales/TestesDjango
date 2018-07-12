@@ -6,7 +6,11 @@ from .models import materias
 
 @admin.register(materias)
 class materiasAdmin(admin.ModelAdmin):
-    list_display = ('id', 'usuario', 'nome', 'ab1', 'ab2', 'reav', 'final',
-     'media', 'faltas', 'carga_horaria', 'max_faltas', 'conceito')
+    #list_display = ('id', 'usuario', 'nome', 'ab1', 'ab2', 'reav', 'final',
+     #'media', 'faltas', 'carga_horaria', 'max_faltas', 'conceito')
+    
+    #list_display = ('id', 'usuario', 'nome', 'faltas', 'carga_horaria', 'max_faltas', 'conceito', 'notas')
+
+    list_display = ('id', 'nome', 'notas')
 
 

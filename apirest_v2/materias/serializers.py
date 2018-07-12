@@ -17,9 +17,6 @@ class materiaSerializer(serializers.ModelSerializer) :
     id = serializers.IntegerField(read_only=True)
     class Meta :
         model = materias
-        fields = ('id', 'usuario', 'nome', 'ab1', 'ab2', 'reav', 
-        'final', 'media', 'faltas', 'carga_horaria', 'max_faltas', 'conceito')
-
-        #fields = ('id', 'usuario','carga_horaria', 'nome', 'faltas', , 'max_faltas', 'conceito', 'notas')
+        fields = '__all__'
 
 
